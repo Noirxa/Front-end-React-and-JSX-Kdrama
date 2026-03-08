@@ -1,90 +1,3 @@
-// import { useState, useEffect } from 'react';
-// import { useParams, Link, useNavigate } from 'react-router-dom';
-//
-// export default function DramaDetail() {
-//     const { id } = useParams();
-//     const [drama, setDrama] = useState(null);
-//     const navigate = useNavigate();
-//
-//     useEffect(() => {
-//         fetch(`http://145.24.237.12:8000/dramas/${id}`, {
-//             headers: { 'Accept': 'application/json' }
-//         })
-//             .then(res => res.json())
-//             .then(data => {
-//                 setDrama(data);
-//             })
-//             .catch(err => console.error("Detail fetch error:", err));
-//     }, [id]);
-//
-//     const handleDelete = async () => {
-//         if (confirm("Terminate mission? This record will be permanently deleted from the archive.")) {
-//             await fetch(`http://145.24.237.12:8000/dramas/${id}`, { method: 'DELETE' });
-//             navigate('/');
-//         }
-//     };
-//
-//     if (!drama) return (
-//         <div className="min-h-screen bg-black flex items-center justify-center">
-//             <p className="text-yellow-500 font-black uppercase animate-pulse tracking-[0.5em]">Decrypting Data...</p>
-//         </div>
-//     );
-//
-//     return (
-//         <div className="max-w-6xl mx-auto my-10 bg-zinc-900 border border-zinc-800 shadow-2xl flex flex-col md:flex-row overflow-hidden">
-//             <div className="flex-1 p-10 border-t-8 border-yellow-500 flex flex-col justify-between">
-//                 <div>
-//                     <h2 className="text-6xl font-black text-yellow-500 uppercase mb-2 italic tracking-tighter leading-none">
-//                         {drama.title}
-//                     </h2>
-//                     <p className="text-zinc-500 font-bold uppercase tracking-[0.3em] text-xs mb-10">
-//                         Classification: {drama.genre}
-//                     </p>
-//
-//                     <div className="grid grid-cols-2 gap-8 mb-10">
-//                         <div className="border-l-2 border-zinc-800 pl-4">
-//                             <span className="text-zinc-500 font-bold uppercase text-[10px] tracking-widest block mb-1">Director</span>
-//                             <p className="text-white text-xl font-bold uppercase italic">{drama.director}</p>
-//                         </div>
-//                         <div className="border-l-2 border-zinc-800 pl-4">
-//                             <span className="text-zinc-500 font-bold uppercase text-[10px] tracking-widest block mb-1">Episodes</span>
-//                             <p className="text-white text-xl font-bold uppercase italic">{drama.episodes || '??'}</p>
-//                         </div>
-//                     </div>
-//
-//                     <div className="border-t border-zinc-800 pt-8">
-//                         <span className="text-zinc-500 font-bold uppercase text-[10px] tracking-widest block mb-4">Mission Briefing</span>
-//                         <p className="text-zinc-300 text-lg leading-relaxed italic">
-//                             {drama.description}
-//                         </p>
-//                     </div>
-//                 </div>
-//
-//                 <div className="flex gap-4 mt-12">
-//                     <Link to={`/dramas/${drama._id}/edit`} className="bg-white text-black px-8 py-3 font-black uppercase text-xs hover:bg-yellow-500 transition-all">
-//                         Modify Dossier
-//                     </Link>
-//                     <button onClick={handleDelete} className="bg-red-900 text-white px-8 py-3 font-black uppercase text-xs hover:bg-red-600 transition-all">
-//                         Terminate Record
-//                     </button>
-//                     <Link to="/" className="ml-auto text-zinc-600 hover:text-white text-[10px] font-black uppercase tracking-widest flex items-center">
-//                         ← Exit to HQ
-//                     </Link>
-//                 </div>
-//             </div>
-//
-//             <div className="w-full md:w-[450px] relative bg-black overflow-hidden group border-l border-zinc-800">
-//                 <img
-//                     src={drama.image}
-//                     alt={drama.title}
-//                     className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700"
-//                     onError={(e) => { e.target.src = 'https://via.placeholder.com/400x600?text=No+Visual+Evidence'; }}
-//                 />
-//             </div>
-//         </div>
-//     );
-// }
-
 import { useState, useEffect } from 'react';
 import { useParams, useNavigate, Link } from 'react-router-dom';
 import { useDramas } from '../context/DramaContext';
@@ -121,7 +34,7 @@ export default function DramaDetail() {
             });
     }, [id, navigate]);
 
-    // [cite: 5, 40] Verwijderen van items
+    //  Verwijderen van items
     const handleDelete = async () => {
         if (!window.confirm("ARE YOU SURE YOU WANT TO PURGE THIS DOSSIER?")) return;
 
@@ -132,7 +45,7 @@ export default function DramaDetail() {
             });
 
             if (response.ok) {
-                // [cite: 18] Index moet automatisch bijwerken
+                // Index moet automatisch bijwerken
                 deleteDramaState(id);
                 navigate('/');
             }

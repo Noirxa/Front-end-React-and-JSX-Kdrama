@@ -10,7 +10,7 @@ export default function DramaForm() {
         episodes: '',
         genre: 'Action',
         description: '',
-        image: '' // De URL voor je poster
+        image: ''
     });
     const navigate = useNavigate();
 
